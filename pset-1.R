@@ -3,6 +3,8 @@
 ##Ivan Rodriguez 202112819
 ##Laura Sofia Arana 202020594
 
+## "R version 4.1.3 (2022-03-10)"
+
 ## Taller A ##
 
 ## Limpiar el entorno
@@ -65,4 +67,20 @@ caractgen %>% select(SECUENCIA_P, ORDEN, HOGAR, DIRECTORIO, P6020, P6040, DPTO, 
 ##directorio, ocupado, INGLABO y P6050
 ##Nota: No se tomó en cuenta P6920 ya que no aparece en el objeto.
 ocu %>% select(SECUENCIA_P, ORDEN, HOGAR, DIRECTORIO, ocupado, INGLABO)
+
+
+
+
+######### Falta por terminar #########
+
+
+##5. Combinar bases de datos ##Hay que revisar que esté correcto 
+combinados = bind_rows(caractgen,ocu, .id = "group")
+combinados
+
+##6. Descriptivas de un conjunto de datos 
+##Use las funciones ggplot(), group_by() y summarize() entre otras, para generar algunas estadísticas descriptivas 
+##(gráficos y tablas) numero de ocupados e ingresos laborales promedio.
+##Tenga en cuenta algunas dimensiones como departamento, sexo y edad. 
+##Las tablas las puede plotear sobre la consola, pero los gráficos los debe exportar en formato .jpeg a la carpeta output. Debe generar mínimo 3 gráficos y 3 tablas.
 
