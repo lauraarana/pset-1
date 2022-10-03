@@ -92,11 +92,18 @@ combinados %>%
   summarise(promedio_p6500 = mean(P6500, na.rm = T),
             media_p6500 = median(P6500, na.rm = T),
             promedio_ESC = mean(ESC, na.rm = T))
+
+summary(ocu)
       
 ##ggplot
 graph1 <- ggplot(data = combinados , mapping = aes(x = P6020 , y = P6500)) +
   geom_point(col = "red" , size = 0.5)
+graph1
 
-graph1 
+graph2 <- ggplot(data = ocu , mapping = aes(x = P6440 , y = P6450)) +
+  geom_point(col = "red" , size = 0.5)
+graph2
 
-
+graph3 <- ggplot(data = combinados, mapping =aes(x=ESC, y=P6500))+
+  geom_point(col = "red" , size = 0.5)
+graph3
