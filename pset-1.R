@@ -61,21 +61,19 @@ caractgen_nueva = caractgen %>% subset(P6040 > 18&P6040<70)
 ## Del objeto que contiene las Características generales, seleccione las variables secuencia_p, orden,
 ##hogar, directorio, P6020, P6040, P6920, DPTO, fex_c_2011, ESC y MES
 ##Nota: No se tomó en cuenta P6920 ya que no aparece en el objeto.
-caractgen %>% select(SECUENCIA_P, ORDEN, HOGAR, DIRECTORIO, P6020, P6040, DPTO, fex_c_2011, ESC, MES) 
+caractgen_nueva %>% select(SECUENCIA_P, ORDEN, HOGAR, DIRECTORIO, P6020, P6040, DPTO, fex_c_2011, ESC, MES) 
 
 ##Del objeto que contiene la base Ocupados, seleccione las variables secuencia_p, orden, hogar,
 ##directorio, ocupado, INGLABO y P6050
 ##Nota: No se tomó en cuenta P6920 ya que no aparece en el objeto.
-ocu %>% select(SECUENCIA_P, ORDEN, HOGAR, DIRECTORIO, ocupado, INGLABO)
-
+ocu %>% select(SECUENCIA_P, ORDEN, HOGAR, DIRECTORIO, ocupado, INGLABO,P6500)
 
 
 
 ######### Falta por terminar #########
 
-
-##5. Combinar bases de datos ##Hay que revisar que esté correcto 
-combinados = bind_rows(caractgen,ocu, .id = "group")
+##5. Combinar bases de datos
+combinados = bind_rows(caractgen_nueva,ocu, .id = "group")
 combinados
 
 ##6. Descriptivas de un conjunto de datos 
@@ -83,4 +81,22 @@ combinados
 ##(gráficos y tablas) numero de ocupados e ingresos laborales promedio.
 ##Tenga en cuenta algunas dimensiones como departamento, sexo y edad. 
 ##Las tablas las puede plotear sobre la consola, pero los gráficos los debe exportar en formato .jpeg a la carpeta output. Debe generar mínimo 3 gráficos y 3 tablas.
+
+##Summarize: 
+summary(combinados)
+summary (combinados [,c("SECUENCIA_P", "ORDEN", "HOGAR", "DIRECTORIO", "P6020", "P6040", "DPTO", "fex_c_2011", "ESC", "MES")])
+
+combinados %>% 
+  select(P6500,P6020,ESC) %>% 
+  group_by(P6020) %>%  
+  summarise(promedio_p6500 = mean(P6500, na.rm = T),
+            media_p6500 = median(P6500, na.rm = T),
+            promedio_ESC = mean(ESC, na.rm = T))
+      
+##ggplot
+graph1 <- ggplot(data = combinados , mapping = aes(x = P6020 , y = P6500)) +
+  geom_point(col = "red" , size = 0.5)
+
+graph1 
+
 
