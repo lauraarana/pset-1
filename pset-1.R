@@ -68,10 +68,6 @@ caractgen_nueva %>% select(SECUENCIA_P, ORDEN, HOGAR, DIRECTORIO, P6020, P6040, 
 ##Nota: No se tomó en cuenta P6920 ya que no aparece en el objeto.
 ocu %>% select(SECUENCIA_P, ORDEN, HOGAR, DIRECTORIO, ocupado, INGLABO,P6500)
 
-
-
-######### Falta por terminar #########
-
 ##5. Combinar bases de datos
 combinados = bind_rows(caractgen_nueva,ocu, .id = "group")
 combinados
